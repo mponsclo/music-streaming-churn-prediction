@@ -1,7 +1,7 @@
 # KKBox Music Streaming Churn Prediction
 
-[![Lint](https://github.com/mponsclo/churn-pred/actions/workflows/lint.yml/badge.svg)](https://github.com/mponsclo/churn-pred/actions/workflows/lint.yml)
-[![Tests](https://github.com/mponsclo/churn-pred/actions/workflows/test.yml/badge.svg)](https://github.com/mponsclo/churn-pred/actions/workflows/test.yml)
+[![Lint](https://github.com/mponsclo/music-streaming-churn-prediction/actions/workflows/lint.yml/badge.svg)](https://github.com/mponsclo/music-streaming-churn-prediction/actions/workflows/lint.yml)
+[![Tests](https://github.com/mponsclo/music-streaming-churn-prediction/actions/workflows/test.yml/badge.svg)](https://github.com/mponsclo/music-streaming-churn-prediction/actions/workflows/test.yml)
 [![Python 3.13](https://img.shields.io/badge/python-3.13-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)

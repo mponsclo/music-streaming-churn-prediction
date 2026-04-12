@@ -1,0 +1,41 @@
+version: 2
+
+models:
+  - name: ml_churn_features
+    description: >
+      Final wide feature table for ML churn prediction. Joins train labels
+      with member demographics, transaction features, and listening behavior.
+      Materialized as parquet at outputs/feature_table.parquet for consumption
+      by downstream modeling scripts.
+    columns:
+      - name: msno
+        description: "Unique user identifier (primary key)"
+        tests:
+          - not_null
+          - unique
+      - name: is_churn
+        description: "Target variable: 1 = churned, 0 = retained"
+        tests:
+          - not_null
+      - name: age
+        description: "Member age (NULL if original was outside 10-70)"
+      - name: gender
+        description: "male / female / unknown"
+      - name: tenure_days
+        description: "Days since registration to 2017-03-01"
+      - name: last_auto_renew
+        description: "Auto-renew status on most recent transaction"
+      - name: last_cancel
+        description: "Cancel status on most recent transaction"
+      - name: txn_count
+        description: "Total transactions (0 if no transaction history)"
+      - name: days_until_expiry
+        description: "Days between last transaction and membership expiry"
+      - name: active_days
+        description: "Listening activity days (0 if no logs)"
+      - name: total_secs
+        description: "Total listening seconds (0 if no logs)"
+      - name: engagement_depth
+        description: "Unique songs / partial listens ratio (0 if no logs)"
+      - name: avg_daily_secs
+        description: "Average seconds per active day (0 if no logs)"

@@ -1,0 +1,12 @@
+dbt-duckdb>=1.9.0
+duckdb>=1.2.1
+pandas==2.2.3
+numpy==1.26.4
+scikit-learn==1.6.1
+lightgbm==4.6.0
+shap==0.46.0
+optuna==4.2.0
+matplotlib==3.10.1
+seaborn==0.13.2
+jupyterlab==4.3.5
+pyarrow==18.1.0

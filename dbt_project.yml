@@ -1,0 +1,22 @@
+name: churn_pred
+version: "1.0.0"
+config-version: 2
+profile: churn_pred
+
+model-paths: ["models"]
+macro-paths: ["macros"]
+target-path: "target"
+clean-targets: ["target", "dbt_packages", "logs"]
+
+vars:
+  # Default project root -- override via env var CHURN_PRED_ROOT if needed
+  project_root: "/Users/MPC/Documents/Github-Personal/churn-pred"
+
+models:
+  churn_pred:
+    staging:
+      +materialized: view
+    intermediate:
+      +materialized: table
+    marts:
+      +materialized: external

@@ -1,0 +1,49 @@
+# Data files (too large for git)
+data/
+
+# Output artifacts (except figures)
+outputs/models/
+outputs/feature_table.parquet
+outputs/val_predictions.parquet
+outputs/X_val.parquet
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.myenv/
+myenv/
+
+# Testing & linting caches
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDEs
+.idea/
+.cursor/
+.claude/
+
+# DuckDB
+*.duckdb
+*.wal
+
+# dbt
+target/
+dbt_packages/
+logs/
+.user.yml
+
+# Environment
+.env
+.env.*

@@ -1,0 +1,66 @@
+version: 2
+
+models:
+  - name: stg_train
+    description: "Cleaned training labels from train_v2.csv"
+    columns:
+      - name: msno
+        description: "Unique hashed user identifier"
+        tests:
+          - not_null
+          - unique
+      - name: is_churn
+        description: "1 = churned, 0 = retained"
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [0, 1]
+
+  - name: stg_members
+    description: >
+      Cleaned member demographics. Age outliers (outside 10-70) are set to NULL.
+      Gender is normalized to male/female/unknown. Tenure is computed as days
+      from registration to the prediction window (2017-03-01).
+    columns:
+      - name: msno
+        tests:
+          - not_null
+          - unique
+      - name: age
+        description: "Age in years (NULL if original bd was outside 10-70)"
+      - name: gender
+        description: "male / female / unknown"
+        tests:
+          - accepted_values:
+              arguments:
+                values: ["male", "female", "unknown"]
+      - name: tenure_days
+        description: "Days from registration to 2017-03-01"
+
+  - name: stg_transactions
+    description: >
+      Cleaned transactions with dates cast from integers to DATE type
+      and a derived discount flag.
+    columns:
+      - name: msno
+        description: "User identifier (not unique, multiple transactions per user)"
+        tests:
+          - not_null
+      - name: transaction_date
+        description: "Transaction date (DATE type)"
+      - name: membership_expire_date
+        description: "Membership expiration date (DATE type)"
+      - name: has_discount
+        description: "1 if actual_amount_paid < plan_list_price, else 0"
+
+  - name: stg_user_logs
+    description: >
+      Daily listening activity. Materialized as a table (not view) because
+      the source CSV is 1.3 GB / 18.3M rows. Storing it in DuckDB columnar
+      format avoids re-parsing on every downstream query.
+    columns:
+      - name: msno
+        description: "User identifier (not unique, multiple days per user)"
+        tests:
+          - not_null

@@ -1,0 +1,6 @@
+-r requirements.txt
+
+# Development & quality
+pytest>=8.0
+ruff>=0.5
+pre-commit>=3.7

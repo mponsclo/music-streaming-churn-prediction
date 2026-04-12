@@ -1,0 +1,65 @@
+version: 2
+
+sources:
+  - name: raw
+    description: "Raw CSV files from the KKBox churn prediction competition (v2 refresh)"
+    tables:
+      - name: train_v2
+        description: "Training labels: msno + is_churn (970,960 rows)"
+        columns:
+          - name: msno
+            description: "Unique hashed user identifier"
+          - name: is_churn
+            description: "1 = churned (no renewal within 30 days of expiry), 0 = retained"
+
+      - name: members_v3
+        description: "Member demographics (6,769,473 rows)"
+        columns:
+          - name: msno
+            description: "Unique hashed user identifier"
+          - name: city
+            description: "City code"
+          - name: bd
+            description: "Age/birthday. Contains outliers: 0, negative, and >100 values"
+          - name: gender
+            description: "male / female / empty string"
+          - name: registered_via
+            description: "Registration channel ID"
+          - name: registration_init_time
+            description: "Registration date as integer (YYYYMMDD)"
+
+      - name: transactions_v2
+        description: "Transaction and subscription history (1,431,009 rows)"
+        columns:
+          - name: msno
+          - name: payment_method_id
+          - name: payment_plan_days
+          - name: plan_list_price
+          - name: actual_amount_paid
+          - name: is_auto_renew
+          - name: transaction_date
+            description: "Transaction date as integer (YYYYMMDD)"
+          - name: membership_expire_date
+            description: "Membership expiration date as integer (YYYYMMDD)"
+          - name: is_cancel
+
+      - name: user_logs_v2
+        description: "Daily listening activity logs (18,396,362 rows)"
+        columns:
+          - name: msno
+          - name: date
+            description: "Log date as integer (YYYYMMDD)"
+          - name: num_25
+            description: "Songs played to 25% completion"
+          - name: num_50
+            description: "Songs played to 50% completion"
+          - name: num_75
+            description: "Songs played to 75% completion"
+          - name: num_985
+            description: "Songs played to 98.5% completion"
+          - name: num_100
+            description: "Songs played to 100% completion"
+          - name: num_unq
+            description: "Unique songs played"
+          - name: total_secs
+            description: "Total listening time in seconds"

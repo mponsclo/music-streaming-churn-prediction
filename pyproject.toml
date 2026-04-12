@@ -1,0 +1,26 @@
+[tool.ruff]
+target-version = "py313"
+line-length = 120
+exclude = [
+    "*.ipynb",
+    "target",
+    "dbt_packages",
+    ".venv",
+    "outputs",
+    "data",
+]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]
+ignore = ["E501"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["src", "config"]
+
+[tool.ruff.format]
+quote-style = "double"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-v --tb=short"

@@ -1,0 +1,40 @@
+version: 2
+
+models:
+  - name: int_transaction_features
+    description: >
+      Per-user transaction aggregates and a snapshot of the most recent
+      transaction. One row per user.
+    columns:
+      - name: msno
+        tests:
+          - not_null
+          - unique
+      - name: txn_count
+        description: "Total number of transactions for this user"
+      - name: total_cancels
+        description: "Lifetime count of cancel events"
+      - name: days_until_expiry
+        description: "Days between latest transaction date and membership expiry"
+      - name: last_auto_renew
+        description: "Auto-renew flag on the most recent transaction"
+      - name: last_cancel
+        description: "Cancel flag on the most recent transaction"
+
+  - name: int_user_log_features
+    description: >
+      Per-user listening behavior aggregates over the full log window
+      (roughly one month of data). One row per user.
+    columns:
+      - name: msno
+        tests:
+          - not_null
+          - unique
+      - name: active_days
+        description: "Number of distinct days with listening activity"
+      - name: total_secs
+        description: "Total listening seconds across all logged days"
+      - name: engagement_depth
+        description: "Ratio of unique songs to partial listens (num_unq / num_25)"
+      - name: avg_daily_secs
+        description: "Average listening seconds per active day"

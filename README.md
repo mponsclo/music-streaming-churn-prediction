@@ -214,10 +214,11 @@ churn-pred/
 │   └── models/                   # Trained LightGBM model + Optuna study
 ├── tests/                        # pytest unit tests
 ├── docs/
+│   ├── 0-glossary.md             # Every term used in the project
 │   ├── 1-data.md                 # Schema + data quality
 │   ├── 2-features.md             # dbt pipeline + feature catalog
 │   ├── 3-modeling.md             # Baseline + LightGBM + Optuna
-│   ├── 4-evaluation.md           # Temporal methodology + SHAP
+│   ├── 4-evaluation.md           # Temporal methodology + SHAP + limitations
 │   ├── 5-experiments.md          # Experiment log
 │   └── blog/                     # Deep-dive posts
 ├── .github/workflows/            # Lint + test CI
@@ -271,15 +272,27 @@ and place in the `data/` directory.
 
 ## Documentation
 
-Deep-dive guides covering each stage of the pipeline:
+### Reading roadmap
+
+Read the guides in order. The glossary is a reference, not required reading, but every term the numbered guides use is defined there.
+
+1. **[0. Glossary](docs/0-glossary.md)** -- every term used in the project, defined once. Skim or search as needed.
+2. **[1. Data](docs/1-data.md)** -- what the four source files look like, where the missingness lives, what signals are real.
+3. **[2. Features](docs/2-features.md)** -- dbt layering, 36-feature catalog, schema tests.
+4. **[3. Modeling](docs/3-modeling.md)** -- baseline + LightGBM + Optuna, with math and code for the core concepts.
+5. **[4. Evaluation](docs/4-evaluation.md)** -- temporal holdout (canonical) vs random split, SHAP, limitations.
+6. **[5. Experiments](docs/5-experiments.md)** -- per-run Config / Results / Diagnosis journal.
+
+Deep-dive guides in table form:
 
 | Guide | Content |
 |-------|---------|
+| [0. Glossary](docs/0-glossary.md) | Every technical term used in the project, defined in one place |
 | [1. Data](docs/1-data.md) | KKBox schema, v2 refresh nuances, data quality audit (missingness, demographic issues) |
 | [2. Features](docs/2-features.md) | dbt pipeline walkthrough, 36-feature catalog with definitions, macros |
 | [3. Modeling](docs/3-modeling.md) | Baseline vs LightGBM, Optuna search space, scale_pos_weight rationale, final hyperparameters |
-| [4. Evaluation](docs/4-evaluation.md) | Temporal holdout methodology, SHAP analysis, calibration vs discrimination |
-| [5. Experiments](docs/5-experiments.md) | Raw experiment journal: every trial, every metric, what didn't work |
+| [4. Evaluation](docs/4-evaluation.md) | Temporal holdout methodology, SHAP analysis, calibration vs discrimination, limitations |
+| [5. Experiments](docs/5-experiments.md) | Raw experiment journal: every run with Config / Results / Diagnosis blocks |
 
 Deep-dive posts:
 

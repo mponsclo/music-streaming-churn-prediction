@@ -9,8 +9,10 @@ target-path: "target"
 clean-targets: ["target", "dbt_packages", "logs"]
 
 vars:
-  # Default project root -- override via env var CHURN_PRED_ROOT if needed
-  project_root: "/Users/MPC/Documents/Github-Personal/churn-pred"
+  # Resolved from CHURN_PRED_ROOT env var; defaults to cwd (Makefile invokes dbt
+  # from the repo root, so "." works out of the box). Override if you run dbt
+  # from a different directory: `export CHURN_PRED_ROOT=/path/to/churn-pred`.
+  project_root: "{{ env_var('CHURN_PRED_ROOT', '.') }}"
 
 models:
   churn_pred:

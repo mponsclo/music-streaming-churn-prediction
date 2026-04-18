@@ -16,38 +16,33 @@ feature engineering to a tuned LightGBM model with SHAP explanations.
 
 ```mermaid
 flowchart LR
-    subgraph RAW["Raw Data (Kaggle)"]
+    subgraph RAW["Raw Data"]
         direction TB
-        R1[train_v2.csv<br/>971K users]
-        R2[members_v3.csv<br/>6.8M users]
-        R3[transactions_v2.csv<br/>1.4M rows]
-        R4[user_logs_v2.csv<br/>18.4M rows]
+        R1[train_v2<br/>971K users]
+        R2[members_v3<br/>6.8M users]
+        R3[transactions_v2<br/>1.4M rows]
+        R4[user_logs_v2<br/>18.4M rows]
     end
 
-    subgraph FE["Feature Engineering (dbt + DuckDB)"]
+    subgraph FE["Feature Engineering"]
         direction TB
-        S[staging<br/>4 views]
-        I[intermediate<br/>2 aggregations]
-        M[marts<br/>ml_churn_features.parquet<br/>36 features]
-        S --> I --> M
+        S[staging] --> I[intermediate] --> M[marts<br/>36 features]
     end
 
     subgraph ML["Modeling"]
         direction TB
-        B[Logistic Regression<br/>baseline]
-        L[LightGBM + Optuna<br/>30 trials, 5-fold CV]
+        B[LogReg baseline]
+        L[LightGBM + Optuna]
     end
 
     subgraph EV["Evaluation"]
         direction TB
-        T[Temporal holdout<br/>Feb 2017 -> Mar 2017]
-        SH[SHAP explanations<br/>global + local]
+        T[Temporal holdout]
+        SH[SHAP]
         RC[ROC / PR curves]
     end
 
-    RAW --> FE
-    FE --> ML
-    ML --> EV
+    RAW --> FE --> ML --> EV
 
     classDef raw fill:#dbeafe,stroke:#1e40af,color:#1e3a8a
     classDef fe fill:#dcfce7,stroke:#166534,color:#14532d
@@ -100,6 +95,8 @@ have modest but measurable effects.
 ![ROC and PR Curves](outputs/figures/11_roc_pr_curves.png)
 
 ## Problem
+
+<img src="docs/images/kkbox_logo.png" alt="KKBox" width="140" align="right"/>
 
 KKBox is Asia's leading music streaming service. A user "churns" if they do not
 renew their subscription within 30 days after it expires. Predicting churn enables
